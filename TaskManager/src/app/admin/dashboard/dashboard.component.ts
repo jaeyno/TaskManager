@@ -1,3 +1,4 @@
+import { DashboardService } from './../../dashboard.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -24,7 +25,7 @@ export class DashboardComponent implements OnInit {
 	TeamMembersSummary = [];
 	TeamMembers = [];
 
-	constructor() { }
+	constructor(private dashboardService: DashboardService) { }
 
 	ngOnInit(): void {
 		this.Designation = "Team Leader";
@@ -38,6 +39,8 @@ export class DashboardComponent implements OnInit {
 		this.AvailableFunds = 52536;
 		this.Today = new Date();
 
+		this.TeamMembersSummary = this.dashboardService.getTeamMembersSummary();
+
 		this.Clients = [
 			"ABC Infotech Ltd.", "DEF Software Solutions", "GHI Industries"
 		]
@@ -48,13 +51,6 @@ export class DashboardComponent implements OnInit {
 
 		this.Years = [
 			2019, 2020, 2021
-		]
-
-		this.TeamMembersSummary = [
-			{ Region: "East", TeamMembersCount: 20, TemporarilyUnavailableMembers: 4},
-			{ Region: "West", TeamMembersCount: 15, TemporarilyUnavailableMembers: 8},
-			{ Region: "South", TeamMembersCount: 17, TemporarilyUnavailableMembers: 1},
-			{ Region: "North", TeamMembersCount: 15, TemporarilyUnavailableMembers: 6}
 		]
 
 		this.TeamMembers = [

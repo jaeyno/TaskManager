@@ -10,6 +10,7 @@ import { Project } from 'src/app/project';
 export class ProjectsComponent implements OnInit {
 
   projects: Project[];
+  newProject: Project = new Project();
 
   constructor( private projectsService: ProjectsService) { }
 
@@ -21,6 +22,14 @@ export class ProjectsComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  onSaveClick() {
+    this.projectsService.insertProject(this.newProject).subscribe((response) => {
+      this.projects.push(this.newProject);
+    }, error => {
+      console.log(error)
+    })
   }
 
 

@@ -2,7 +2,7 @@ export class Project {
     
     projectId: number;
     projectName: string;
-    dateOfStart: string;
+    dateOfStart: Date;
     teamSize: number;
 
     constructor() {

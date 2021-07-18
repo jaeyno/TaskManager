@@ -13,6 +13,8 @@ export class ProjectsComponent implements OnInit {
   newProject: Project = new Project();
   editProject: Project = new Project();
   editIndex: any = null;
+  deleteProject: Project = new Project();
+  deleteIndex: any = null;
 
   constructor( private projectsService: ProjectsService) { }
 
@@ -68,6 +70,27 @@ export class ProjectsComponent implements OnInit {
     }, error => {
       console.log(error)
     });
+  }
+
+  onDeleteClick(event:any, index: number) {
+    this.deleteProject.projectID = this.projects[index].projectID;
+    this.deleteProject.projectName = this.projects[index].projectName;
+    this.deleteProject.dateOfStart = this.projects[index].dateOfStart;
+    this.deleteProject.teamSize = this.projects[index].teamSize;
+    this.deleteIndex = index;
+  }
+
+  onDeleteConfirmClick() {
+    this.projectsService.deleteProject(this.deleteProject.projectID).subscribe((response) => {
+      this.projects.splice(this.deleteIndex, 1);
+      
+      this.deleteProject.projectID = null;
+      this.deleteProject.projectName = null;
+      this.deleteProject.dateOfStart = null;
+      this.deleteProject.teamSize = null;
+    }, error => {
+      console.log(error);
+    })
   }
 
 }

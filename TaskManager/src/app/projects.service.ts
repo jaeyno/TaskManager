@@ -16,7 +16,11 @@ export class ProjectsService {
     return this.http.get<Project[]>("/api/projects");
   }
 
-  insertProject(newProject: Project) : Observable<Project> {
+  insertProject(newProject: Project): Observable<Project> {
     return this.http.post<Project>("/api/projects", newProject);
+  }
+
+  updateProject(existingProject: Project): Observable<Project> {
+    return this.http.put<Project>("/api/projects", existingProject);
   }
 }

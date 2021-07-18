@@ -8,19 +8,21 @@ import { Project } from './project';
 })
 export class ProjectsService {
 
+  apiUrl: string = "https://localhost:5001"
+
   constructor(
     private http: HttpClient
   ) { }
 
   getAllProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>("/api/projects");
+    return this.http.get<Project[]>(this.apiUrl + "/api/projects");
   }
 
   insertProject(newProject: Project): Observable<Project> {
-    return this.http.post<Project>("/api/projects", newProject);
+    return this.http.post<Project>(this.apiUrl + "/api/projects", newProject);
   }
 
   updateProject(existingProject: Project): Observable<Project> {
-    return this.http.put<Project>("/api/projects", existingProject);
+    return this.http.put<Project>(this.apiUrl + "/api/projects", existingProject);
   }
 }

@@ -28,33 +28,40 @@ export class ProjectsComponent implements OnInit {
 
   onSaveClick() {
     this.projectsService.insertProject(this.newProject).subscribe((response) => {
-      this.projects.push(this.newProject);
-      this.newProject.projectId = null;
-      this.newProject.projectName = null;
-      this.newProject.dateOfStart = null;
-      this.newProject.teamSize = null;
+        var p: Project = new Project();
+        p.projectID = response.projectID;
+        p.projectName = response.projectName;
+        p.dateOfStart = response.dateOfStart;
+        p.teamSize = response.teamSize;
+        this.projects.push(p);
+
+        this.newProject.projectID = null;
+        this.newProject.projectName = null;
+        this.newProject.dateOfStart = null;
+        this.newProject.teamSize = null;
     }, error => {
       console.log(error)
     })
   }
 
   onEditClick(event: any, index: number) {
-    this.editProject.projectId = this.projects[index].projectId;
+    this.editProject.projectID = this.projects[index].projectID;
     this.editProject.projectName = this.projects[index].projectName;
     this.editProject.dateOfStart = this.projects[index].dateOfStart;
     this.editProject.teamSize = this.projects[index].teamSize;
+    this.editIndex = index;
   }
 
   onUpdateClick() {
     this.projectsService.updateProject(this.editProject).subscribe((response: Project) => {
       var p: Project = new Project();
-      p.projectId = response.projectId;
+      p.projectID = response.projectID;
       p.projectName = response.projectName;
       p.dateOfStart = response.dateOfStart;
       p.teamSize = response.teamSize;
       this.projects[this.editIndex] = p;
 
-      this.editProject.projectId = null;
+      this.editProject.projectID = null;
       this.editProject.projectName = null;
       this.editProject.dateOfStart = null;
       this.editProject.teamSize = null;

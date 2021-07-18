@@ -16,7 +16,7 @@
         <tr *ngFor="let project of projects; let i = index">
           <td>{{project.projectID}}</td>
           <td>{{project.projectName}}</td>
-          <td>{{project.dateOfStart}}</td>
+          <td>{{project.dateOfStart | date: "medium"}}</td>
           <td>{{project.teamSize}}</td>
           <td>
             <button class="btn btn-info" (click)="onEditClick($event, i)" data-toggle="modal" data-target="#editModal">Edit</button>
@@ -42,7 +42,7 @@
             <label for="txtNewProjectID" class="col-sm-4 col-form-label">Project ID</label>
             <div class="col-sm-8">
               <input type="number" id="txtNewProjectID" class="form-control" placeholder="Project ID"
-                name="ProjectID" [(ngModel)]="newProject.projectId">
+                name="ProjectID" [(ngModel)]="newProject.projectID">
             </div>
           </div>
 
@@ -98,11 +98,10 @@
               <input
                 type="number"
                 id="txtEditProjectID"
-                style="width: 100px"
                 class="form-control-plain-text"
                 placeholder="Project ID"
                 name="ProjectID"
-                [(ngModel)]="editProject.projectId"
+                [(ngModel)]="editProject.projectID"
                 disabled="disabled"
               />
             </div>
@@ -128,7 +127,6 @@
               <input
                 type="date"
                 id="txtEditDateOfStart"
-                style="width: 150px"
                 class="form-control"
                 placeholder="Date of Start"
                 name="DateOfStart"
@@ -142,7 +140,6 @@
             <div class="col-sm-8">
               <input type="number"
                 id="txtEditTeamSize"
-                style="width: 150px"
                 class="form-control"
                 placeholder="Team Size"
                 name="TeamSize"

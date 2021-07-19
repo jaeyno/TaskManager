@@ -15,7 +15,7 @@ export class ProjectsService {
   ) { }
 
   getAllProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.apiUrl + "/api/projects", { responseType: "json"});
+    return this.http.get<Project[]>(this.apiUrl + "/api/projects", { responseType: "json"})
   }
 
   insertProject(newProject: Project): Observable<Project> {
